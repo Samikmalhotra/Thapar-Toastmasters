@@ -1,0 +1,4 @@
+{
+    "mongoURI": "mongodb+srv://toastmaster:toa5tmast3r$thapar@cluster0.9pfhl.mongodb.net/toastmasters?retryWrites=true&w=majority",
+    "jwtSecret": "thaparToastmasters"
+}
