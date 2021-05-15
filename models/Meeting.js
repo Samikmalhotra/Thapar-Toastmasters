@@ -13,7 +13,7 @@ const MeetingSchema = new mongoose.Schema({
         // default:
     },
     date:{
-        type: Date,
+        type: String,
         required: true
     },
     mom_link:{

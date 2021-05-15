@@ -57,7 +57,7 @@ router.post('/',
         }
     });
 
-    // @route   POST api/auth/users
+// @route   POST api/auth/users
 // @desc    Register user
 // @access  Public
 router.post('/users',

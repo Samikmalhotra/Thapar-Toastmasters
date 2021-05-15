@@ -34,7 +34,6 @@ router.get('/:toastmaster_id', async (req, res) => {
 // @route    GET api/users
 // @desc     Get all users
 // @access   Public
-
 router.get('/', async(req,res)=>{
     try {
         const users = await User.find();
