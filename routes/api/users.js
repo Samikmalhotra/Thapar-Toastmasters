@@ -14,7 +14,6 @@ const User = require('../../models/User')
 // @access   Public
 router.get('/:toastmaster_id', async (req, res) => {
 
-    const {toastmaster_id} = req.body;
 
     try {
       const user = await User.findOne({toastmaster_id: req.params.toastmaster_id});

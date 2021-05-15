@@ -4,10 +4,10 @@ const auth = require('../../middleware/auth');
 const {check, validationResult} = require('express-validator');
 const Meeting = require('../../models/Meeting') 
 
-// @route   POST api/meetings
+// @route   POST api/meetings/add
 // @desc    Add meeting
 // @access  Public
-router.post('/',
+router.post('/add',
 [
     check('meeting_id', 'meeting_id is required').not().isEmpty(),
     check('meeting_title',"Please include meeting_title").not().isEmpty(),
@@ -95,5 +95,36 @@ async(req,res)=>{
         res.status(500).send('Server Error!')
     }
 });
+
+// @route    GET api/meetings
+// @desc     Get all meetings
+// @access   Public
+router.get('/', async(req,res)=>{
+    try {
+        const meetings = await Meeting.find();
+        res.json(meetings) 
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send('Server Error!')
+    }
+})
+
+// @route    GET api/meetings/:meeting_id
+// @desc     Get meeting by id
+// @access   Public
+router.get('/:meeting_id', async(req,res)=>{
+    try {
+        const meeting = await Meeting.find({meeting_id: req.params.meeting_id});
+
+        if (!meeting) {
+            return res.status(400).json({ msg: 'Meeting does not exist' });
+        }
+        
+        res.json(meeting) 
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send('Server Error!')
+    }
+})
 
 module.exports = router
