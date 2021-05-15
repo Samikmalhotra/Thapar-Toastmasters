@@ -27,7 +27,7 @@ router.post('/',
         const {name, toastmaster_id, password, pathway, role, avatar} = req.body;
 
         try{
-            let user = await User.findOne({email});
+            let user = await User.findOne({toastmaster_id});
 
             // See if user exists
             if(user){
