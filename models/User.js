@@ -4,17 +4,21 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    toastmaster_id:{
+        type:String,
+        required: true
+    },
     password: {
         type: String,
         required: true
     },
     pathway:{
-        type: String,
+        type: String, 
         required: true
     },
     role:{
         type: String,
-        default: member
+        default: "member"
     },
     avatar: {
         type: String
