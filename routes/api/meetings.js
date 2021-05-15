@@ -1,13 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const auth = require('../../middleware/auth');
-const Meeting = require('../../models/Meeting');
 const {check, validationResult} = require('express-validator');
-const jwt = require('jsonwebtoken');
-const config = require('config');
-const bcrypt = require('bcryptjs');
-
-
+const Meeting = require('../../models/Meeting') 
 
 // @route   POST api/meetings
 // @desc    Add meeting
@@ -18,6 +13,7 @@ router.post('/',
     check('meeting_title',"Please include meeting_title").not().isEmpty(),
     check('date',"Please enter a password of atleast 6 characters").not().isEmpty(),
     check('mom_link',"Please include a pathway").not().isEmpty(),
+    check('tmod',"Please include a pathway").not().isEmpty(),
     check('wordmaster',"Please include a pathway").not().isEmpty(),
     check('generaleval',"Please include a pathway").not().isEmpty(),
     check('tabletopicmaster',"Please include a pathway").not().isEmpty(),
@@ -42,6 +38,7 @@ async(req,res)=>{
         meeting_title,
         date,
         mom_link,
+        tmod,
         wordmaster,
         generaleval,
         tabletopicmaster,
@@ -70,27 +67,28 @@ async(req,res)=>{
        
         meeting = new Meeting({
             meeting_id,
-        meeting_title,
-        date,
-        mom_link,
-        wordmaster,
-        generaleval,
-        tabletopicmaster,
-        tabletopiceval,
-        ahcounter,
-        grammarian,
-        listener,
-        speaker1,
-        speaker2,
-        speaker3,
-        speaker4,
-        eval1,
-        eval2,
-        eval3,
-        eval4
+            meeting_title,
+            date,
+            mom_link,
+            tmod,
+            wordmaster,
+            generaleval,
+            tabletopicmaster,
+            tabletopiceval,
+            ahcounter,
+            grammarian,
+            listener,
+            speaker1,
+            speaker2,
+            speaker3,
+            speaker4,
+            eval1,
+            eval2,
+            eval3,
+            eval4
         });
 
-        res.send("done")
+        await meeting.save()
 
     }catch(e){
         console.error(e.message);
