@@ -12,7 +12,7 @@ const MeetingSchema = new mongoose.Schema({
         type:String
         // default:
     },
-    date:{
+    meeting_date:{
         type: String,
         required: true
     },
@@ -80,6 +80,10 @@ const MeetingSchema = new mongoose.Schema({
     eval4:{
         type: String,
     },
+    date:{
+        type: Date,
+        default: Date.now
+    }
 
 })
 

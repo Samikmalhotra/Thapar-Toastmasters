@@ -11,7 +11,7 @@ router.post('/add',
 [
     check('meeting_id', 'meeting_id is required').not().isEmpty(),
     check('meeting_title',"Please include meeting_title").not().isEmpty(),
-    check('date',"Please enter a password of atleast 6 characters").not().isEmpty(),
+    check('meeting_date',"Please enter a password of atleast 6 characters").not().isEmpty(),
     check('mom_link',"Please include a pathway").not().isEmpty(),
     check('tmod',"Please include a pathway").not().isEmpty(),
     check('wordmaster',"Please include a pathway").not().isEmpty(),
@@ -36,7 +36,7 @@ async(req,res)=>{
     const {
         meeting_id,
         meeting_title,
-        date,
+        meeting_date,
         mom_link,
         tmod,
         wordmaster,
@@ -68,7 +68,7 @@ async(req,res)=>{
         meeting = new Meeting({
             meeting_id,
             meeting_title,
-            date,
+            meeting_date,
             mom_link,
             tmod,
             wordmaster,
@@ -88,8 +88,8 @@ async(req,res)=>{
             eval4
         });
 
-        await meeting.save()
-
+        const newMeeting = await meeting.save()
+        res.json(newMeeting)
     }catch(e){
         console.error(e.message);
         res.status(500).send('Server Error!')
@@ -101,7 +101,7 @@ async(req,res)=>{
 // @access   Public
 router.get('/', async(req,res)=>{
     try {
-        const meetings = await Meeting.find();
+        const meetings = await Meeting.find().sort({date:-1});
         res.json(meetings) 
     } catch (error) {
         console.error(error.message);
