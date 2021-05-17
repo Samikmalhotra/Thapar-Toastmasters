@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
 const RoleSchema = new mongoose.Schema({
-    user:{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'user'
+    toastmaster_id:{
+        type: String,
+        ref: 'user',
+        required: true
     },
     role:{
         type:String,
@@ -12,13 +13,18 @@ const RoleSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    date:{
-        type:Date,
+    meeting_date:{
+        type:String,
         required: true
     },
     commendation:{
         type: String,
+    },
+    date:{
+        type: Date,
+        default: Date.now
     }
+
 })
 
 module.exports = Role = mongoose.model('role', RoleSchema)
